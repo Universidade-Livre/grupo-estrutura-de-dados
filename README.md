@@ -1,6 +1,3 @@
-# grupo-estrutura-de-dados
-Esse repositório contém informações relacionadas ao grupo de estudos de estrutura de dados. 
-
 # Grupo de Estudos de Estruturas de Dados
 
 Repositório com informações sobre o grupo de estudos de Estruturas de Dados da UBL.
