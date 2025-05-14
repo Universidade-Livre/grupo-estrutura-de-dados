@@ -1,29 +1,23 @@
-//Alguns exemplos de algoritmos mostrados no capítulo
+//Exemplo 2.1 - Busca Simples
 
 #include <iostream>
+#include <vector>
 using namespace std;
 
-int busca1(int L[], int n, int x) {
-    int i = 0;
-    int busca1 = 0;
-    while (i <= n) {
-        if (L[i] == x) {
-            busca1 = i;
-            break;
-        } else {
-            i++;
+int busca1(vector<int>& arr, int x) {
+    for (int i = 0; i < arr.size(); i++) {
+        if (arr[i] == x){
+            return i;
         }
     }
-    return busca1;
+    return -1;
 }
 
 int main() {
-    int L[] = {10, 20, 30, 40, 50};
-    int n = sizeof(L) / sizeof(L[0]);
+    vector<int> arr = {10, 20, 30, 40, 50};
     int x = 30;
-
-    int resultado = busca1(L, n, x);
-    if (resultado != 0){
+    int resultado = busca1(arr, x);
+    if (resultado != -1){
         cout << "Elemento encontrado na posição: " << resultado << endl;
     } else {
         cout << "Elemento não encontrado." << endl;
