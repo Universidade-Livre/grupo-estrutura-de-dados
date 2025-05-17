@@ -1,0 +1,22 @@
+** Exercício 17
+
+Uma palavra é um palíndromo se a sequência de letras que a forma é a mesma, quer seja lida da esquerda para a direita ou da direita para a esquerda (exemplo: raiar). Escrever um algoritmo eficiente para reconhecer se uma dada palavra é um palíndromo. Escolher a estrutura de dados conveniente para representar a palavra.
+
+** Solução
+
+Seja ~String~ um tipo com os seguintes atributos:
+- ~data: &char~;
+- ~capacity: u32~;
+- ~size: u32~.
+
+Vamos considerar que ~String~ possui um método de acesso ao elemento em uma dada posição ~get(self: &String, pos: u32) -> Option<char>~. Note que ~String~ é uma lista de caracteres (tipo ~char~).
+
+*** Detectar palíndromos
+
+#+BEGIN_SRC
+function is_palindrome(str: &String) -> bool:
+	for i = 0 to floor(n/2) - 1:
+		if str.get(i) != str.get(str.size - 1 - i):
+			return false
+	return true
+#+END_SRC
