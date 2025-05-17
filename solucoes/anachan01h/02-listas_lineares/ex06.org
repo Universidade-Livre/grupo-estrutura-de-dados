@@ -1,0 +1,66 @@
+** Exercício 6
+
+Apresentar algoritmos para um deque em alocação sequencial. São dados fornecidos:
+- na inserção: o nó a ser inserido e a extremidade desejada (E1 ou E2),
+- na remoção: a extremidade da remoção.
+
+** Solução
+
+Seja ~T~ um tipo e considere o tipo ~Deque<T>~ com os seguintes atributos:
+- ~data: &T~;
+- ~capacity: u32~;
+- ~size: u32~;
+- ~start: u32~.
+
+*** Inserir elemento na esquerda
+
+#+BEGIN_SRC
+function push_front(self: &Deque<T>, value: T) -> Result:
+	if self.size < self.capacity:
+		i = (self.start - 1) % self.capacity
+		self.data[i] = value
+		self.size = self.size + 1
+		self.start = i
+		return Ok
+	else:
+		return Error
+#+END_SRC
+
+*** Inserir elemento na direita
+
+#+BEGIN_SRC
+function push_back(self: &Deque<T>, value: T) -> Result:
+	if self.size < self.capacity:
+		i = (self.start + self.size) % self.capacity
+		self.data[i] = value
+		self.size = self.size + 1
+		return Ok
+	else:
+		return Error
+#+END_SRC
+
+*** Remover elemento na esquerda
+
+#+BEGIN_SRC
+function pop_front(self: &Deque<T>) -> Result<T, ()>:
+	if self.size != 0:
+		value = self.data[self.start]
+		self.size = self.size - 1
+		self.start = (self.start + 1) % self.capacity
+		return Ok(value)
+	else:
+		return Error
+#+END_SRC
+
+*** Remover elemento na direita
+
+#+BEGIN_SRC
+function pop_back(self: &Deque<T>) -> Result<T, ()>:
+	if self.size != 0:
+		i = (self.start + self.size - 1) % self.capacity
+		value = self.data[i]
+		self.size = self.size - 1
+		return Ok(value)
+	else:
+		return Error
+#+END_SRC

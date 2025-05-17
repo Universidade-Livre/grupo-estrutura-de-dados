@@ -1,0 +1,41 @@
+** Exercício 11
+
+Descrever algoritmos de inserção e remoção em uma lista não ordenada, em alocação encadeada.
+
+** Solução
+
+Seja ~T~ um tipo e considere o tipo ~Node<T>~ com os seguintes atributos:
+- ~data: T~;
+- ~next: &Node<T>~.
+
+Considere também o tipo ~List<T>~ com os seguintes atributos:
+- ~start: &Node<T>~;
+- ~size: u32~.
+
+Vamos considerar que ~List<T>~ sempre possui um nó-cabeça e um método de busca ~search(self: &List<T>, value: T) -> Option<(&Node<u32>, &Node<u32>)>~.
+
+*** Inserir elemento
+
+#+BEGIN_SRC
+function insert(self: &List<T>, value: T):
+	match self.search(value):
+		None =>
+			new_node = mem_alloc(size_of(Node<T>))
+			new_node.data = value
+			new_node.next = self.start.next
+			self.start.next = new_node
+		Some(_) =>
+	return
+#+END_SRC
+
+*** Remover elemento
+
+#+BEGIN_SRC
+function remove(self: &List<T>, value: T):
+	match self.search(value):
+		Some(prev_node, node) =>
+			prev_node.next = node.next
+			mem_free(node)
+		None =>
+	return
+#+END_SRC

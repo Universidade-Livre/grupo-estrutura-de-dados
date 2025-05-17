@@ -1,0 +1,49 @@
+** Exercício 1
+
+Apresentar os algoritmos de inserção e remoção de uma lista ordenada em alocação sequencial.
+
+** Solução
+
+Seja ~T~ um tipo e considere o tipo ~List<T>~ com os seguintes atributos:
+- ~data: &T~;
+- ~capacity: u32~;
+- ~size: u32~.
+
+Também assuma que ~List<T>~ possui um método de busca ~search(self: &List<T>, value: T) -> Option<u32>~.
+
+*** Inserir elemento
+
+#+BEGIN_SRC
+function insert(self: &List<T>, value: T) -> Result:
+	if self.size < self.capacity:
+		self.data[self.size] = value
+		i = 0
+		while self.data[i] < value:
+			i = i + 1
+		if i == self.size:
+			self.size = self.size + 1
+		else if self.data[i] != value:
+			for j = self.size - 1 to i with step -1:
+				self.data[j + 1] = self.data[j]
+			self.data[i] = value
+			self.size = self.size + 1
+		return Ok
+	else:
+		return Error
+#+END_SRC
+
+*** Remover elemento
+
+#+BEGIN_SRC
+function remove(self: &List<T>, value: T) -> Result:
+	if self.size != 0:
+		match self.search(value):
+			Some(i) =>
+				for j = i to self.size - 2:
+					self.data[j] = self.data[j + 1]
+				self.size = self.size - 1
+			None =>
+		return Ok
+	else:
+		return None
+#+END_SRC
